@@ -14,7 +14,7 @@ import {
     Loader
 } from 'decentraland-ui'
 
-import ERC20 from "../abi/ERC20.json"
+import ERC20 from "abi/ERC20.json"
 
 export default function WalletApp() {
     const [ tokenContract, setTokenContract ] = React.useState<Contract>()
