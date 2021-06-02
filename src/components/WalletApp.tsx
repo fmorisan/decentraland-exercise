@@ -14,14 +14,23 @@ import {
 
 import Token from "abi/Token.json"
 import TransferForm from './TransferForm'
+import getContractAddress from "contractAddresses"
 
 export default function WalletApp() {
     const [ tokenContract, setTokenContract ] = React.useState<Contract>()
     const [ tokenBalance, setTokenBalance ] = React.useState<BigNumber>(BigNumber.from(0))
     const { account, library, chainId } = useWeb3React()
 
+    if (!account || !chainId || !tokenContract) {
+        return <Loader />
+    }
+
     React.useEffect(() => {
-        let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", Token.abi, library)
+        let contract = new Contract(
+            getContractAddress(chainId),
+            Token.abi,
+            library
+        )
         setTokenContract(contract)
         contract.balanceOf(account).then((balance: BigNumber) => {
             console.log(balance.toString())
@@ -29,9 +38,6 @@ export default function WalletApp() {
         })
     }, [setTokenContract, setTokenBalance, account, library])
 
-    if (!account || !chainId || !tokenContract) {
-        return <Loader />
-    }
 
     return (
         <>
