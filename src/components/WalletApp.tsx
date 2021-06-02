@@ -1,6 +1,6 @@
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Contract, BigNumberish, BigNumber } from 'ethers'
+import { Contract, BigNumber } from 'ethers'
 import {
     HeaderMenu,
     Header,
@@ -8,8 +8,6 @@ import {
     Address,
     Mana,
     Center,
-    Field,
-    Button,
     Segment,
     Loader
 } from 'decentraland-ui'
@@ -29,7 +27,7 @@ export default function WalletApp() {
             console.log(balance.toString())
             setTokenBalance(balance)
         })
-    }, [setTokenContract, setTokenBalance])
+    }, [setTokenContract, setTokenBalance, account, library])
 
     if (!account || !chainId || !tokenContract) {
         return <Loader />

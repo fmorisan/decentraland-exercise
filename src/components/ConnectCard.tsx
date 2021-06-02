@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 
 import MetamaskConnector from '../connectors'
 
-export default function() {
+export default function ConnectCard() {
     const { activate } = useWeb3React()
 
     return (

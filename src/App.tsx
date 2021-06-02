@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
-import { Navbar, Page, Footer, Center, Segment } from 'decentraland-ui'
+import { Navbar, Page, Footer } from 'decentraland-ui'
 
-
-import logo from './logo.svg';
 import './App.css';
 import WalletApp from "./components/WalletApp"
 import ConnectCard from "./components/ConnectCard"

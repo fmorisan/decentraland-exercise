@@ -1,5 +1,5 @@
-import { useState, useCallback, ReactPropTypes } from 'react'
-import { BigNumber, Contract, Signer } from 'ethers'
+import { useState } from 'react'
+import { BigNumber, Contract } from 'ethers'
 import {
     Form,
     Field,
