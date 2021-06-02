@@ -10,6 +10,8 @@ Please note that the [supplied token contract](https://github.com/decentraland/d
 * Transfer event listening (there is no Transfer event emitted)
 * Decimals in token balances (there is no `decimals()` function to call)
 
+A preview of this site is automatically deployed on Netlify. [See here](https://romantic-shannon-0edf6a.netlify.app/)
+
 ## Supported chains
 The app supports clients connected both to
 * Hardhat network (local, chainID 1337)
