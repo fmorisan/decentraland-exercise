@@ -1,17 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import 'decentraland-ui/lib/styles.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import 'decentraland-ui/lib/styles.css'
+import App from './App'
+import reportWebVitals from './reportWebVitals'
 import { Web3ReactProvider } from '@web3-react/core'
 import * as ethers from 'ethers'
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from './store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Web3ReactProvider getLibrary={(provider, connector) => new ethers.providers.Web3Provider(provider)}>
-      <App />
-    </Web3ReactProvider>
+    <ReduxProvider store={store}>
+      <Web3ReactProvider getLibrary={(provider, connector) => new ethers.providers.Web3Provider(provider)}>
+        <App />
+      </Web3ReactProvider>
+    </ReduxProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

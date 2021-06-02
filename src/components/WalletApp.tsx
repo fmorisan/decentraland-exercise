@@ -12,14 +12,17 @@ import {
     Loader
 } from 'decentraland-ui'
 
-import Token from "abi/Token.json"
+import Token from 'abi/Token.json'
 import TransferForm from './TransferForm'
-import getContractAddress from "contractAddresses"
+import getContractAddress from 'contractAddresses'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { setBalance } from 'features/balance'
 
 export default function WalletApp() {
     const [ tokenContract, setTokenContract ] = React.useState<Contract>()
-    const [ tokenBalance, setTokenBalance ] = React.useState<BigNumber>(BigNumber.from(0))
     const { account, library, chainId } = useWeb3React()
+    const dispatch = useAppDispatch()
+    const balance = useAppSelector((state) => state.balance.value)
     
     React.useEffect(() => {
         let contract = new Contract(
@@ -27,18 +30,15 @@ export default function WalletApp() {
             Token.abi,
             library
         )
-        setTokenContract(contract)
         contract.balanceOf(account).then((balance: BigNumber) => {
-            console.log(balance.toString())
-            setTokenBalance(balance)
+            dispatch(setBalance(balance.toNumber()))
         })
-    }, [setTokenContract, setTokenBalance, account, library, chainId])
+        setTokenContract(contract)
+    }, [setTokenContract, account, library, chainId, dispatch])
 
     if (!account || !chainId || !tokenContract) {
         return <Loader />
     }
-
-
 
     return (
         <>
@@ -62,15 +62,12 @@ export default function WalletApp() {
                         Your token balance
                     </Header>
                     <Mana>
-                        {tokenBalance?
-                            tokenBalance.toString():
-                            <Loader active size="mini" />
-                        }
+                        {balance.toString()}
                     </Mana>
                     <Header>
                         Send funds
                     </Header>
-                    <TransferForm balance={tokenBalance} contract={tokenContract} />
+                    <TransferForm contract={tokenContract}/>
                 </Segment>
             </Center>
         </>
