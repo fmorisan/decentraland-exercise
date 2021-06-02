@@ -15,7 +15,7 @@ export default function TransferForm({contract}: {contract: Contract}) {
     const balance = useAppSelector((store) => store.balance.value)
     const dispatch = useAppDispatch()
 
-    const { library } = useWeb3React()
+    const { account, library } = useWeb3React()
 
     const [ receiver, setReceiver ] = useState<string>("")
     // We can just use a bare BigNumber since the Dummy token provided 
@@ -42,7 +42,9 @@ export default function TransferForm({contract}: {contract: Contract}) {
             () => alert("failed")
         ).then(
             () => {
-                dispatch(decrementBalanceByAmount(amount))
+                if (receiver !== account) {
+                    dispatch(decrementBalanceByAmount(amount))
+                }
                 setWaiting(false)
             }
         )
