@@ -6,7 +6,6 @@ import {
     Header,
     Blockie,
     Address,
-    Card,
     Mana,
     Center,
     Field,
@@ -34,22 +33,22 @@ export default function WalletApp() {
         
     })
 
-    let content = <> </>
-    if (tokenContract) {
+    if (!account || !chainId || !tokenContract) {
+        return <Loader />
     }
 
     return (
         <>
             <HeaderMenu>
                 <HeaderMenu.Left>
-                    <Blockie scale={3} seed={ account as string }>
-                        <Address strong value={ account as string } />
+                    <Blockie scale={3} seed={ account }>
+                        <Address strong value={ account } />
                     </Blockie>
                     
                 </HeaderMenu.Left>
                 <HeaderMenu.Right>
                     <strong>
-                        Connected to chain { chainId as number }
+                        Connected to chain { chainId }
                     </strong>
                 </HeaderMenu.Right>
             </HeaderMenu>
