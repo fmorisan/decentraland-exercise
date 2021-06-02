@@ -62,7 +62,8 @@ export default function TransferForm({contract}: {contract: Contract}) {
                     onChange={(evt) => {
                         setReceiver(evt.target.value || "")
                     }}
-                    error={!isReceiverValid} />
+                    error={!isReceiverValid}
+                    message={isReceiverValid?"":"Not a valid Ethereum address"}/>
 
             <Field 
                     label="Amount"
@@ -71,7 +72,8 @@ export default function TransferForm({contract}: {contract: Contract}) {
                     onChange={(evt) => {
                         setAmount(parseInt(evt.target.value) || 0)
                     }}
-                    error={!isAmountValid}/>
+                    error={!isAmountValid}
+                    message={isAmountValid?"":`Amount should be between 0 and ${balance}`}/>
             
                 <Button
                         primary
