@@ -2,6 +2,8 @@
  * Contract addresses for different networks
  */
 
+import { ethers } from "ethers"
+
 const CONTRACT_ADDRESSES = new Map<number, string>([
     // Hardhat / Local
     [1337, "0x5FbDB2315678afecb367f032d93F642f64180aa3"],
@@ -11,6 +13,6 @@ const CONTRACT_ADDRESSES = new Map<number, string>([
 
 export default function getContractAddress(chainId: number) : string {
     let value = CONTRACT_ADDRESSES.get(chainId)
-    if (!value) throw new Error("Chain ID not supported")
+    if (!value) return ethers.constants.AddressZero
     return value
 }

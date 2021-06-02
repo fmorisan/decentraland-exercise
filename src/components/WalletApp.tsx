@@ -20,14 +20,10 @@ export default function WalletApp() {
     const [ tokenContract, setTokenContract ] = React.useState<Contract>()
     const [ tokenBalance, setTokenBalance ] = React.useState<BigNumber>(BigNumber.from(0))
     const { account, library, chainId } = useWeb3React()
-
-    if (!account || !chainId || !tokenContract) {
-        return <Loader />
-    }
-
+    
     React.useEffect(() => {
         let contract = new Contract(
-            getContractAddress(chainId),
+            getContractAddress(chainId as number),
             Token.abi,
             library
         )
@@ -36,7 +32,12 @@ export default function WalletApp() {
             console.log(balance.toString())
             setTokenBalance(balance)
         })
-    }, [setTokenContract, setTokenBalance, account, library])
+    }, [setTokenContract, setTokenBalance, account, library, chainId])
+
+    if (!account || !chainId || !tokenContract) {
+        return <Loader />
+    }
+
 
 
     return (
