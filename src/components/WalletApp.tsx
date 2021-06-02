@@ -1,6 +1,6 @@
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Contract, BigNumberish } from 'ethers'
+import { Contract, BigNumberish, BigNumber } from 'ethers'
 import {
     HeaderMenu,
     Header,
@@ -15,23 +15,21 @@ import {
 } from 'decentraland-ui'
 
 import ERC20 from "abi/ERC20.json"
+import TransferForm from './TransferForm'
 
 export default function WalletApp() {
     const [ tokenContract, setTokenContract ] = React.useState<Contract>()
-    const [ tokenBalance, setTokenBalance ] = React.useState<BigNumberish>()
+    const [ tokenBalance, setTokenBalance ] = React.useState<BigNumber>(BigNumber.from(0))
     const { account, library, chainId } = useWeb3React()
 
     React.useEffect(() => {
-        if (!tokenContract) {
-            let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", ERC20.abi, library)
-            setTokenContract(contract)
-            contract.balanceOf(account).then((balance: BigNumberish) => {
-                console.log(balance)
-                setTokenBalance(balance)
-            })
-        }
-        
-    })
+        let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", ERC20.abi, library)
+        setTokenContract(contract)
+        contract.balanceOf(account).then((balance: BigNumber) => {
+            console.log(balance.toString())
+            setTokenBalance(balance)
+        })
+    }, [setTokenContract, setTokenBalance])
 
     if (!account || !chainId || !tokenContract) {
         return <Loader />
@@ -67,14 +65,9 @@ export default function WalletApp() {
                     <Header>
                         Send funds
                     </Header>
-                    <Field label="address" type="address" />
-                    <Field label="amount" type="number" />
-                    <Button primary onClick={() => alert("Send")}>
-                        Send funds!
-                    </Button>
+                    <TransferForm balance={tokenBalance} contract={tokenContract} />
                 </Segment>
             </Center>
         </>
-
     )
 }
