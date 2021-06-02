@@ -1,4 +1,9 @@
 # Decentraland Challenge
+
+<p align="center">
+<img width="1111" alt="image" src="https://user-images.githubusercontent.com/8476943/120518885-6d439600-c3a8-11eb-98ea-60a5ae3617e3.png">
+</p>
+
 This project is a solution to Decentraland's technical challenge. It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and makes use of
 * [web3-react](https://github.com/NoahZinsmeister/web3-react)
 * [ethers.js](https://github.com/ethers-io/ethers.js)
