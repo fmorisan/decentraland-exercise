@@ -12,7 +12,7 @@ import {
     Loader
 } from 'decentraland-ui'
 
-import ERC20 from "abi/ERC20.json"
+import Token from "abi/Token.json"
 import TransferForm from './TransferForm'
 
 export default function WalletApp() {
@@ -21,7 +21,7 @@ export default function WalletApp() {
     const { account, library, chainId } = useWeb3React()
 
     React.useEffect(() => {
-        let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", ERC20.abi, library)
+        let contract = new Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", Token.abi, library)
         setTokenContract(contract)
         contract.balanceOf(account).then((balance: BigNumber) => {
             console.log(balance.toString())
