@@ -3,6 +3,7 @@ This project is a solution to Decentraland's technical challenge. It was bootstr
 * [web3-react](https://github.com/NoahZinsmeister/web3-react)
 * [ethers.js](https://github.com/ethers-io/ethers.js)
 * [decentraland-ui](https://github.com/decentraland/ui/)
+* [redux-toolkit](https://github.com/reduxjs/redux-toolkit)
 
 This app allows an user to connect their wallet, view their balance of a dummy token, and send it to some other address.  
 Please note that the [supplied token contract](https://github.com/decentraland/dummy-token) only supports a *subset* of the ERC20 specification, and so the following features have been elided:
