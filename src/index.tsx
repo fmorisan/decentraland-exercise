@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'decentraland-ui/lib/styles.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Web3ReactProvider } from '@web3-react/core'
+import * as ethers from 'ethers'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Web3ReactProvider getLibrary={(provider, connector) => new ethers.providers.Web3Provider(provider)}>
+      <App />
+    </Web3ReactProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
