@@ -10,7 +10,7 @@ export default function ConnectCard() {
     return (
         <Center>
             <Button primary onClick={() => activate(MetamaskConnector, () => {
-                alert("Please connect to the Rinkeby Test Network")
+                alert('Please connect to any supported network: Rinkeby or Localhost (1337)')
             })}>
                 Connect
             </Button>

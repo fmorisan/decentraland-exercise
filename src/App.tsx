@@ -3,8 +3,8 @@ import { useWeb3React } from '@web3-react/core'
 import { Navbar, Page, Footer } from 'decentraland-ui'
 
 import './App.css';
-import WalletApp from "./components/WalletApp"
-import ConnectCard from "./components/ConnectCard"
+import WalletApp from './components/WalletApp'
+import ConnectCard from './components/ConnectCard'
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
   )
 
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar></Navbar>
       <Page>
               {
