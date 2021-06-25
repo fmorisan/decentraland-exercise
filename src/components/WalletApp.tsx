@@ -71,19 +71,19 @@ export default function WalletApp() {
                         {balance.toString()}
                     </Mana>
                     <Tabs>
-                        <Tabs.Tab active={tabToShow==TRANSFER_TAB_KEY} onClick={() => setTabToShow(TRANSFER_TAB_KEY)}>
+                        <Tabs.Tab active={tabToShow===TRANSFER_TAB_KEY} onClick={() => setTabToShow(TRANSFER_TAB_KEY)}>
                             Transfer
                         </Tabs.Tab>
-                        <Tabs.Tab active={tabToShow==BURN_TAB_KEY} onClick={() => setTabToShow(BURN_TAB_KEY)}>
+                        <Tabs.Tab active={tabToShow===BURN_TAB_KEY} onClick={() => setTabToShow(BURN_TAB_KEY)}>
                             Burn
                         </Tabs.Tab>
                     </Tabs>
                     {
-                        tabToShow==TRANSFER_TAB_KEY?
+                        tabToShow===TRANSFER_TAB_KEY?
                             <TransferForm contract={tokenContract} />:null
                     }
                     {
-                        tabToShow==BURN_TAB_KEY?
+                        tabToShow===BURN_TAB_KEY?
                             <BurnForm contract={tokenContract} />:null
                     }
                 </Segment>

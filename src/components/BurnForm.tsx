@@ -6,7 +6,6 @@ import {
     Button,
     Loader
 } from 'decentraland-ui'
-import { isAddress } from '@ethersproject/address'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { decrementBalanceByAmount } from 'features/balance'
@@ -17,7 +16,7 @@ export default function BurnForm({contract}: {contract: Contract}) {
     const balance = useAppSelector((store) => store.balance.value)
     const dispatch = useAppDispatch()
 
-    const { account, library } = useWeb3React()
+    const { library } = useWeb3React()
 
     const [ amount, setAmount ] = useState<number>(INITIAL_AMOUNT)
     const [ waitingForTx, setWaiting ] = useState<boolean>(false)
