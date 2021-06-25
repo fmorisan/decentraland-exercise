@@ -9,17 +9,24 @@ import {
     Mana,
     Center,
     Segment,
-    Loader
+    Loader,
+    Tabs
 } from 'decentraland-ui'
 
 import Token from 'abi/Token.json'
 import TransferForm from './TransferForm'
+import BurnForm from './BurnForm'
+
 import getContractAddress from 'contractAddresses'
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { setBalance } from 'features/balance'
 
+const TRANSFER_TAB_KEY = "transfer"
+const BURN_TAB_KEY = "burn"
+
 export default function WalletApp() {
     const [ tokenContract, setTokenContract ] = React.useState<Contract>()
+    const [ tabToShow, setTabToShow ] = React.useState<string>(TRANSFER_TAB_KEY)
     const { account, library, chainId } = useWeb3React()
     const dispatch = useAppDispatch()
     const balance = useAppSelector((state) => state.balance.value)
@@ -55,8 +62,7 @@ export default function WalletApp() {
                     </strong>
                 </HeaderMenu.Right>
             </HeaderMenu>
-            <Center>
-                        
+            <Center>    
                 <Segment>
                     <Header>
                         Your token balance
@@ -64,10 +70,22 @@ export default function WalletApp() {
                     <Mana>
                         {balance.toString()}
                     </Mana>
-                    <Header>
-                        Send funds
-                    </Header>
-                    <TransferForm contract={tokenContract}/>
+                    <Tabs>
+                        <Tabs.Tab active={tabToShow==TRANSFER_TAB_KEY} onClick={() => setTabToShow(TRANSFER_TAB_KEY)}>
+                            Transfer
+                        </Tabs.Tab>
+                        <Tabs.Tab active={tabToShow==BURN_TAB_KEY} onClick={() => setTabToShow(BURN_TAB_KEY)}>
+                            Burn
+                        </Tabs.Tab>
+                    </Tabs>
+                    {
+                        tabToShow==TRANSFER_TAB_KEY?
+                            <TransferForm contract={tokenContract} />:null
+                    }
+                    {
+                        tabToShow==BURN_TAB_KEY?
+                            <BurnForm contract={tokenContract} />:null
+                    }
                 </Segment>
             </Center>
         </>
